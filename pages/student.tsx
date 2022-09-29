@@ -2,14 +2,13 @@ import { InferGetServerSidePropsType } from "next";
 
 type Cards = {
     id : string
-    name : string
-    grade : string
+    s_name : string
+    s_grade : string
 }
 
 export const getStaticProps = async () => {
     const res = await fetch(`http://localhost:3000/api/data`)
     const cards: Cards[] = await res.json()
-    console.log(cards)
     return {
         props: {
             cards,
@@ -18,12 +17,32 @@ export const getStaticProps = async () => {
 }
 
 function Student({ cards }: InferGetServerSidePropsType<typeof getStaticProps>) {
-    return (
-        <h1>{cards.map(cards => {
-            return (
-                <p>{cards.id}</p>
-            )
-        })}</h1>
+    return(
+        <>
+        <div>
+        <h1>Students</h1>
+        <ul>
+            {cards.map(card => {
+                return (
+                    <>
+                        <br />
+                        <li key={card.id}>
+                            {card.s_name}
+                            <br />
+                            {card.s_grade}
+                        </li>
+                    </>
+                );
+            })}
+        </ul>
+        </div>
+        
+        <div>
+        <h1>Subject</h1>
+        </div>
+        </>
+
+        
     )
 }
 
