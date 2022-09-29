@@ -21,7 +21,7 @@ function Student({ cards }: InferGetServerSidePropsType<typeof getStaticProps>) 
     return (
         <h1>{cards.map(cards => {
             return (
-                <p></p>
+                <p>{cards.id}</p>
             )
         })}</h1>
     )
